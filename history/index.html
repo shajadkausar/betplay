@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BetPlay</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+
+  <style>
+    body {
+      font-family: "lato", sans-serif;
+    }
+
+    h2,
+    h3 {
+      font-family: "Poppins", sans-serif;
+    }
+
+
+    @media all and (max-width: 767px) {
+      .table-header {
+        display: none;
+      }
+      li {
+        display: block;
+      }
+      .col {
+        flex-basis: 50%;
+      }
+      .col {
+        display: flex;
+        padding: 10px 0;
+      }
+    }
+    option {
+      font-size: 18px;
+      background-color: white;
+      color: orangered;
+    }
+    .line {
+      flex-direction: row;
+      display: flex;
+      white-space: initial;
+    }
+ 
+    .line > p {
+      width: 75vw;
+      white-space: initial;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+    .number {
+      font-size: 18px;
+    }
+  </style>
+  <body>
+    <div class="header">
+      <div style="display: flex; justify-content: space-between">
+        <h2 style="color:#4f718a ;">>> BetPlay</h2>
+        <h3 class="margin-left-pc" id="time-counter"></h3>
+      </div>
+      <div class="header-user">
+        <p class="mob-margin-top-less-15" id="profile-name"></p>
+        <p class="mob-margin-top-less-15">
+          Credits: <span id="user-credit"></span>
+        </p>
+      </div>
+    </div>
+
+    <div
+      style="display: flex; justify-content: space-evenly; margin-bottom: 15px"
+    >
+      <div class="header-option header-option" id="header-game">
+        <p>Play</p>
+      </div>
+      <div class="header-option-active" id="header-history">
+        <p>Games</p>
+      </div>
+     
+    </div>
+
+    <div style="padding: 10px 20px; display: flex;flex-direction: column;">
+        <div style=" display: flex;">
+            <input class="btn-plum" style="padding: 10px 20px;font-size: 14px;" type="date" id="date" />
+            &emsp; &emsp;
+                <select
+                name="history-match"
+                id="history-match"
+                class="btn-plum"
+                style="color: white; padding: 5px 15px; font-size: 14px;"
+                >
+          <option value="9:0 AM">9:0 AM</option>
+          <option value="9:15 AM">9:15 AM</option>
+          <option value="9:30 AM">9:30 AM</option>
+          <option value="9:45 AM">9:45 AM</option>
+          <option value="10:0 AM">10:0 AM</option>
+          <option value="10:15 AM">10:15 AM</option>
+          <option value="10:30 AM">10:30 AM</option>
+          <option value="10:45 AM">10:45 AM</option>
+          <option value="11:0 AM">11:0 AM</option>
+          <option value="11:15 AM">11:15 AM</option>
+          <option value="11:30 AM">11:30 AM</option>
+          <option value="11:45 AM">11:45 AM</option>
+          <option value="11:0 AM">11:0 AM</option>
+          <option value="11:15 AM">11:15 AM</option>
+          <option value="11:30 AM">11:30 AM</option>
+          <option value="11:45 AM">11:45 AM</option>
+          <option value="12:0 AM">12:0 PM</option>
+          <option value="12:15 PM">12:15 PM</option>
+          <option value="12:30 PM">12:30 PM</option>
+          <option value="12:45 PM">12:45 PM</option>
+          <option value="1:0 PM">1:0 PM</option>
+          <option value="1:15 PM">1:15 PM</option>
+          <option value="1:30 PM">1:30 PM</option>
+          <option value="1:45 PM">1:45 PM</option>
+          <option value="2:0 PM">2:0 PM</option>
+          <option value="2:15 PM">2:15 PM</option>
+          <option value="2:30 PM">2:30 PM</option>
+          <option value="2:45 PM">2:45 PM</option>
+          <option value="3:0 PM">3:0 PM</option>
+          <option value="3:15 PM">3:15 PM</option>
+          <option value="3:30 PM">3:30 PM</option>
+          <option value="3:45 PM">3:45 PM</option>
+          <option value="4:0 PM">4:0 PM</option>
+          <option value="4:15 PM">4:15 PM</option>
+          <option value="4:30 PM">4:30 PM</option>
+          <option value="4:45 PM">4:45 PM</option>
+          <option value="5:0 PM">5:0 PM</option>
+          <option value="5:15 PM">5:15 PM</option>
+          <option value="5:30 PM">5:30 PM</option>
+          <option value="5:45 PM">5:45 PM</option>
+          <option value="6:0 PM">6:0 PM</option>
+          <option value="6:15 PM">6:15 PM</option>
+          <option value="6:30 PM">6:30 PM</option>
+          <option value="6:45 PM">6:45 PM</option>
+          <option value="7:0 PM">7:0 PM</option>
+          <option value="7:15 PM">7:15 PM</option>
+          <option value="7:30 PM">7:30 PM</option>
+          <option value="7:45 PM">7:45 PM</option>
+          <option value="8:0 PM">8:0 PM</option>
+          <option value="8:15 PM">8:15 PM</option>
+          <option value="8:30 PM">8:30 PM</option>
+          <option value="8:45 PM">8:45 PM</option>
+          <option value="9:0 PM">9:0 PM</option>
+        </select>
+    </div>
+    <div style="margin-top: 20px;display: flex; justify-content: space-between; flex-direction: row;">
+      <a  class="btn-short" style=" width: 100px; text-align: center; height: 30px;"
+       id="showBtn">Show &ensp; <span style="color: orangered"> &#x27F6;</span></a>
+      <div style="display: flex; flex-direction:column; "
+      >
+      <p style="margin-top: -8px" id="games-res-date">
+      </p>
+      <!-- <p style="margin-top: -8px"><span>7:45 PM</span>&emsp;<span style="color: orangered">5</span></p> -->
+      <p style="margin-top: -15px"><span id="games-res-match"></span>&emsp;
+        <span style="color: orangered" id="games-res-scrip"></span></p>
+    </div></div>
+   
+    </div>
+    <div style="padding: 10px 20px">
+      <div id="sale-table">
+    </div>
+    <p id="comment-text" style="text-align: center"></p>
+
+    <div style="height: 50px"></div>
+  </div>
+    <br /><br />
+    <div style="background-color: #F0F0F0; margin-bottom: -10px">
+      <p
+        style="
+          text-align: left;
+          font-size: 10px;
+          font-family: Poppins;
+          padding: 10px 20px;
+          line-height: 12px;
+         
+        "
+      >
+        <span style=" text-decoration: overline;">© 2022,BetPlay</span><br />
+       
+      </p>
+  
+    <script src="../style.js"></script>
+    <script type="module" src="./firebase.js"></script>
+  </body>
+</html>

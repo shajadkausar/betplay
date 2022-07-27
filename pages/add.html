@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Credits</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <style>
+    h2,
+    h3 {
+      font-family: "Poppins", sans-serif;
+    }
+  </style>
+  <body style="padding: 0 40px">
+    <h2 style="color: black">>> MyLot</h2>
+    <div class="header-user">
+      <p class="mob-margin-top-less-15" id="profile-name"></p>
+      <p class="mob-margin-top-less-15">
+        Credits: <span id="user-credit"></span>
+      </p>
+    </div>
+    <h2>Contact Your Dealer:</h2>
+    <h3
+      style="
+        color: orangered;
+        border: 1px solid orangered;
+        padding: 5px 15px;
+        width: fit-content;
+      "
+      id="dealer-email"
+    ></h3>
+    <br /><br />
+    <a class="btn-submit" href="/index.html">Back</a>
+    <!-- <div style="text-align: left">
+      <p>Your credits will be credited to your balance within 15 minutes.</p>
+      <h3 style="color: orangered">
+        UPI
+         <span style="font-size: small">(Suggested)</span> 
+      </h3>
+      <strong>Mention your phone no. while or after payment</strong>
+      <p>Rate: ₹1 = 1 credit (example: ₹1000 = 1000 credits)</p>
+      <p>
+        Just pay to ANY of the following UPI using any UPI app
+        (GooglePay/PhonePe/Paytm, etc.)
+      </p>
+      <p>
+        <span
+          style="
+            border: 1px solid blue;
+            padding: 5px 12px;
+            border-radius: 10px;
+            color: orangered;
+          "
+          >mylotto@sbmbank</span
+        >
+        <br /><br />
+        OR
+        <br /><br />
+        <span
+          style="
+            border: 1px solid blue;
+            padding: 5px 12px;
+            border-radius: 10px;
+            color: orangered;
+          "
+          >anirbandeb430@okaxis</span
+        ><br /><br />
+        OR
+        <br /><br />
+        <span
+          style="
+            border: 1px solid blue;
+            padding: 5px 12px;
+            border-radius: 10px;
+            color: orangered;
+          "
+          >anirbandeb430-1@okicici</span
+        >
+      </p>
+      <p>OR scan this QR:</p>
+      <img style="width: 150px" src="../asset/qr.png" />
+      <h3>
+        <strong
+          ><a href="https://wa.me/918016575357?text=Hello"
+            >Click to msg on Whatsapp: 8016575357</a
+          >
+        </strong>
+      </h3>
+    </div> -->
+  </body>
+  <script type="module">
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut,
+    } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { fc } from "/js/c.js";
+    import {
+      getDoc,
+      doc,
+      getFirestore,
+    } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+
+    const app = initializeApp(fc);
+    const db = getFirestore(app);
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        loadUserData(user.email);
+      } else {
+        window.location = "/pages/login.html";
+      }
+    });
+
+    async function loadUserData(email) {
+      const ref = doc(db, "dealers", email);
+      const docSnap = await getDoc(ref);
+      if (docSnap.exists()) {
+        let data = docSnap.data();
+        showUserCredits(data.name, data.credit);
+        showDealerName(email);
+      }
+    }
+
+    function showUserCredits(name, credit) {
+      document.getElementById("profile-name").textContent += name;
+      document.getElementById("user-credit").textContent = credit;
+    }
+    async function showDealerName(email) {
+      const ref = doc(db, "dealers", email);
+      const docSnap = await getDoc(ref);
+
+      if (docSnap.exists()) {
+        const sEmail = docSnap.data().sEmail;
+        document.getElementById("dealer-email").innerHTML = sEmail;
+      }
+    }
+  </script>
+</html>

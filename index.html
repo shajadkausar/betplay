@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BetPlay</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+<style>
+  .container2 {
+      display: flex;
+      margin-left: 10vw;
+      align-items: center;
+      margin-top: 30px;
+    }
+    .sale-table {
+      width: 58vw;
+    }
+    .sale-table .li {
+      /* width: 50vw; */
+      border-radius: 0px;
+      padding: 0px 30px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .col2 {
+      font-size: 14px;
+    }
+    .or2 {
+      color: orangered;
+    }
+    .sale-table .table-header {
+      background-color: white;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: orangered;
+    }
+    .sale-table .table-row {
+      background-color: #fff;
+     
+      box-shadow: rgb(199, 199, 199) 0px 18px 50px -10px;
+    }
+    @media all and (max-width: 767px) {
+      .table-header {
+        display: none;
+      }
+      .li {
+        display: block;
+      }
+      .col2 {
+        flex-basis: 50%;
+      }
+      .col2 {
+        display: flex;
+        padding: 5px 0;
+      }
+    }
+</style>
+  <body>
+    <div class="header">
+      <div style="display: flex; justify-content: space-between">
+        <h2 style="font-size: 22px; color:  rgb(255, 255, 255);">>> BetPlay <<</h2>
+        <h3 class="margin-left-pc"  style="font-size: 22px; font-weight: 500; color: #4f718a;" id="time-counter"></h3>
+      </div>
+      <div class="header-user">
+        <p class="mob-margin-top-less-15" id="profile-name"></p>
+        <p class="mob-margin-top-less-15">
+          Credits: <span id="user-credit"></span>
+        </p>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: space-evenly">
+      <div class="header-option-active" id="header-game">
+        <p>Play
+        </p>
+      </div>
+      <div class="header-option" id="header-history">
+        <p>Games</p>
+      </div>
+    </div>
+    <br />
+    <div id="game-div">
+      <div class="draw-time">
+        <div class="draw-time-inner">
+          <p id="draw-date"></p>
+          <p>Next Draw: <span id="draw-time"></span></p>
+        </div>
+      </div>
+      <div class="section over-hide z-bigger">
+      
+        <div style="margin-top: 5px" class="section over-hide z-bigger">
+          <div class="container pb-5">
+            <div class="row justify-content-center pb-5">
+              <div class="col-12 pt-5">
+                <p class="mb-4 pb-2">Select your choice</p>
+              </div>
+              <div class="col-12 pb-5">
+                <input
+                  class="checkbox-tools"
+                  type="radio"
+                  name="scrip"
+                  value="0"
+                  id="0"
+                  checked
+                />
+                <label class="for-checkbox-tools" for="0"> 0 </label
+                ><!--
+              --><input
+                  class="checkbox-tools"
+                  type="radio"
+                  name="scrip"
+                  value="1"
+                  id="1"
+                />
+                <label class="for-checkbox-tools" for="1"> 1 </label>
+                <input
+                  class="checkbox-tools"
+                  type="radio"
+                  name="scrip"
+                  value="2"
+                  id="2"
+                />
+                <label class="for-checkbox-tools" for="2"> 2 </label
+                ><!--
+              --><input
+                  class="checkbox-tools"
+                  type="radio"
+                  name="scrip"
+                  value="3"
+                  id="3"
+                />
+                <label class="for-checkbox-tools" for="3"> 3 </label
+                ><!--
+              --><input
+                  class="checkbox-tools"
+                  type="radio"
+                  name="scrip"
+                  value="4"
+                  id="4"
+                />
+                <label class="for-checkbox-tools" for="4"> 4 </label
+                ><!--
+              --><input
+                  class="checkbox-tools"
+                  type="radio"
+                  name="scrip"
+                  value="5"
+                  id="5"
+                />
+                <label class="for-checkbox-tools" for="5"> 5 </label
+                ><!--
+              --><input
+                  class="checkbox-tools"
+                  type="radio"
+                  name="scrip"
+                  value="6"
+                  id="6"
+                />
+                <label class="for-checkbox-tools" for="6"> 6 </label>
+                <input
+                  class="checkbox-tools"
+                  type="radio"
+                  name="scrip"
+                  value="7"
+                  id="7"
+                />
+                <label class="for-checkbox-tools" for="7"> 7 </label
+                ><input
+                  class="checkbox-tools"
+                  type="radio"
+                  name="scrip"
+                  value="8"
+                  id="8"
+                />
+                <label class="for-checkbox-tools" for="8"> 8 </label
+                ><input
+                  class="checkbox-tools"
+                  type="radio"
+                  name="scrip"
+                  value="9"
+                  id="9"
+                />
+                <label class="for-checkbox-tools" for="9"> 9 </label>
+              </div>
+
+              <div style="margin-top: 15px">
+                <p>Bet amount</p>
+                <input
+                  class="bet-amt"
+                  placeholder="0"
+                  id="bet-amt"
+                  type="number"
+                />
+              </div>
+              <br>
+              <div class="col-xl-10 pb-5">
+                <button class="btn-plum" id="btn-submit">Place Bet</button>
+              </div>
+              <img style="margin-left: 80px;margin-top: 15px; width: 70px;" src="asset/point.png">
+            </br>
+            <br><br>
+          </div>
+          <div style="padding: 60px 20px">
+            <p>Next Draw: <span id="draw-time2"></span></p>
+            <table>
+              <tbody id="game-draw-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="height: 100px"></div>
+    <div style="height: 15px;"></div>
+    <div style="display: flex; justify-content: space-between; padding: 0 20px">
+      <a class="btn-short" href="contact.html">Contact Us &ensp; <span style="color: orangered"> &#x27F6;</span></a>
+      <a class="btn-short" href="about.html">About Project &ensp; <span style="color: orangered"> &#x27F6;</span></a>
+    </div>
+    <div style="height: 15px;"></div>
+    <div style="display: flex; justify-content: space-between; padding: 0 20px">
+      <a class="btn-short" id="wp-msg" href="https://wa.me/918016575357">Whatsapp support &ensp; <span style="color: orangered"> &#x27F6;</span></a>
+      <button class="btn-short" id="logoutBtn">
+        Log out
+      </button>
+    </div>
+    </div>
+    <br /><br />
+
+    <div style="background-color: #F3F3F3; margin-bottom: -10px">
+      <p
+        style="
+          text-align: left;
+          font-size: 10px;
+          font-family: Poppins;
+          padding: 10px 20px;
+          line-height: 12px;
+        "
+      >      
+       © 2022, BetPlay       
+      </p>
+    </div>
+    <script src="style.js"></script>
+    <script type="module" src="js/index.js"></script>
+    <script type="module" src="js/f.js"></script>
+  </body>
+</html>

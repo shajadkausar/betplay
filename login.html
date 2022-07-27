@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <style>
+    input {
+      height: 20px;
+      width: 180px;
+      padding: 10px 30px;
+      color: rgb(255, 128, 0);
+      border: 2px solid black;
+    }
+    .com {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+  <body style="margin-top: 10vh">
+    <div id="form">
+      <div class="com">
+        <p>
+          Demo credentails, use: <br />
+          email: <strong>demo@betplay.com</strong><br />
+          password: <strong>abc123</strong>
+        </p>
+        <input type="email" id="email" placeholder="email .." required />
+        <br />
+        <input type="text" id="password" placeholder="password .." required />
+      </div>
+      <div style="margin-top: 20px; display: flex; justify-content: center">
+        <!-- <button id="signupBtn" class="btn-submit">Sign Up</button>
+        <span style="width: 50px"></span> -->
+        <button id="loginBtn" class="btn-submit">Log In</button>
+      </div>
+
+      <br /><br />
+      <div style="margin-top: 40px; flex-direction: column; text-align: center">
+        <h2>Forgot password ?</h2>
+        <a
+          href="mailto:1906230@kiit.ac.in"
+          style="text-decoration: none"
+          class="btn-submit"
+          >Mail us now</a
+        >
+      </div>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+        signOut,
+        setPersistence,
+        browserSessionPersistence,
+        //inMemoryPersistence,
+      } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+      import { fc } from "/js/c.js";
+      let loginBtn = document.getElementById("loginBtn");
+      let logoutBtn = document.getElementById("logoutBtn");
+
+      const app = initializeApp(fc);
+      const auth = getAuth(app);
+
+      loginBtn.addEventListener("click", (e) => {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        //user_margin.textContent = "";
+
+        //setPersistence(auth, browserSessionPersistence).then(() => {
+        //setPersistence(auth, inMemoryPersistence).then(() => {
+        //return
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            // loginStyle();
+            // showHoldings(user.email);
+            window.location = "/";
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorCode, errorMessage);
+          });
+        //});
+      });
+
+      /*  logoutBtn.addEventListener("click", (e) => {
+        signOut(auth)
+          .then(() => {
+            logoutStyle();
+          })
+          .catch((error) => {
+            alert(error);
+          });
+      }); */
+
+      /*      export async function showHoldings(email) {
+        const ref = doc(db, "users", email);
+        const docSnap = await getDoc(ref);
+        if (docSnap.exists()) {
+          let data = docSnap.data();
+          let inv = data.inv;
+          holding_info(inv);
+          let keysH = Object.keys(holding).sort();
+          keysH.forEach((scrip) => {
+            let [qty, avg] = holding[scrip];
+            showEachHolding(scrip, qty, avg);
+          });
+          order_add_cards.innerHTML = "";
+          if (orders) {
+            orders.forEach((order) => {
+              let name = Object.keys(order)[0];
+              let [type, qty, avg, time] = order[name];
+              showEachOrder(name, type, qty, avg, time);
+            });
+          }
+        } else {
+          alert("Please signup !");
+        }
+      }
+      function holding_info(inv) {
+        holding_add_cards.innerHTML = `<div class="holding-status"></div>`;
+      } */
+    </script>
+  </body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <style>
+    html {
+      background-color: #e5e5e5;
+      color: rgb(22, 100, 77);
+      /* font-family: "Hubballi"; */
+    }
+
+    input,
+    textarea {
+      width: 250px;
+      padding: 15px 15px;
+      text-align: center;
+      background-image: linear-gradient(
+        70.5deg,
+        rgba(0, 81, 80, 1) 23.5%,
+        rgba(0, 134, 132, 1) 91.3%
+      );
+      border-style: none;
+      border-radius: 25px;
+      color: white;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    textarea {
+      font-size: 12px;
+      color: rgb(255, 202, 183);
+    }
+    input::placeholder {
+      color: rgb(255, 202, 183);
+    }
+    input:focus {
+      outline: none;
+    }
+    textarea:focus {
+      outline: none;
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 15px 30px;
+      background-image: linear-gradient(
+        70.5deg,
+        rgba(0, 81, 80, 1) 23.5%,
+        rgba(0, 134, 132, 1) 91.3%
+      );
+      color: rgb(255, 202, 183);
+      border-radius: 25px;
+      cursor: pointer;
+      width: 60px;
+      text-align: center;
+    }
+    .btn:hover {
+      background-image: linear-gradient(
+        70.5deg,
+        rgb(230, 57, 72) 23.5%,
+        rgb(240, 167, 32) 91.3%
+      );
+      color: white;
+    }
+    .btn-opp {
+      margin-top: 20px;
+      padding: 15px 30px;
+      background-image: linear-gradient(
+        70.5deg,
+        rgb(230, 57, 72) 23.5%,
+        rgb(240, 167, 32) 91.3%
+      );
+      color: white;
+      border-radius: 25px;
+      cursor: pointer;
+      width: 60px;
+      text-align: center;
+    }
+    .btn-opp:hover {
+      background-image: linear-gradient(
+        70.5deg,
+        rgba(0, 81, 80, 1) 23.5%,
+        rgba(0, 134, 132, 1) 91.3%
+      );
+      color: rgb(255, 202, 183);
+    }
+    body {
+      padding: 10px 50px;
+    }
+    .center {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    a {
+      text-decoration: none;
+      color: rgb(22, 100, 77);
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      font-family: monospace;
+    }
+  </style>
+  <body>
+    <h2 style="font-size: 22px; color: rgb(255, 255, 255)">>> BetPlay <<</h2>
+
+    <div class="center">
+      <input type="text" placeholder="name" name="name" id="name" />
+      <input type="email" placeholder="email" name="email" id="email" />
+      <textarea rows="5" cols="60" name="message" name="message" id="message">
+        Write query here...
+     </textarea
+      >
+      <a type="submit" class="btn" id="submitBtn">Submit</a>
+    </div>
+  </body>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut,
+    } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+    import { fc } from "/js/c.js";
+    import {
+      getDoc,
+      doc,
+      arrayUnion,
+      runTransaction,
+      increment,
+      getFirestore,
+    } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+    const app = initializeApp(fc);
+    const db = getFirestore(app);
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        //showUserEmail(user.email);
+      } else {
+        window.location = "login.html";
+      }
+    });
+    let submitBtn = document.getElementById("submitBtn");
+    submitBtn.addEventListener("click", async (e) => {
+      let message = document.getElementById("message").value;
+      let email = document.getElementById("email").value;
+      try {
+        await runTransaction(db, async (transaction) => {
+          transaction.update(
+            doc(db, "queries", "q"),
+            {
+              [email]: message,
+            },
+            { merge: true }
+          );
+        });
+        clearData();
+      } catch (e) {
+        console.error(e);
+        alert("error ! " + e);
+      }
+    });
+    async function loadUserData(email) {
+      const ref = doc(db, "users", email);
+      const docSnap = await getDoc(ref);
+    }
+    function clearData() {
+      document.getElementById("message").innerText = "";
+      document.getElementById("email").innerText = "";
+      document.getElementById("name").innerHTML = "";
+      alert("Submitted successfully !");
+    }
+  </script>
+</html>
